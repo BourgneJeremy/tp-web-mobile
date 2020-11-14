@@ -1,15 +1,37 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Button } from 'react-native';
 import { Meal } from '../models/types';
-import { Button, Card, Divider } from 'react-native-paper';
+import { Card, Divider } from 'react-native-paper';
+import { DetailsScreenNavigationProp } from '../screens/DetailsScreen';
 
-const MealItem: React.FC<Meal> = ({ title, category, thumbnail}) => {
+type Props = {
+    id: string,
+    title: string,
+    category: string,
+    instructions: string
+    thumbnail: string
+}
+
+const MealItem: React.FC<Props> = ({ id, title, category, instructions, thumbnail}) => {
+
+    let navigation: DetailsScreenNavigationProp;
+
+    const meal: Meal = {
+        id: id,
+        title: title,
+        category: category,
+        instructions: instructions,
+        thumbnail: thumbnail
+    }
+
+    const SeeMore = () => navigation.navigate('Details', { meal });
+
     return(
         <Card>
             <Card.Title title={title} subtitle={"Category: " + category} />
             <Card.Cover source={{ uri: thumbnail }} />
             <Card.Actions>
-                <Button>See more</Button> 
+                <Button title="See more" onPress={SeeMore}>See more</Button> 
             </Card.Actions>
             <Divider />
         </Card>

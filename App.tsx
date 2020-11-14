@@ -2,12 +2,12 @@ import React from 'react';
 import { Provider as PaperProvider } from 'react-native-paper';
 import { StyleSheet } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { NavigationContainer } from '@react-navigation/native';
-import { Meal } from './src/models/types';
+import { NavigationContainer, RouteProp } from '@react-navigation/native';
 import HomeScreen from './src/screens/HomeScreen';
 import SearchScreen from './src/screens/SearchScreen';
 import DetailsScreen from './src/screens/DetailsScreen';
 import RandomScreen from './src/screens/RandomScreen';
+import { Meal } from './src/models/types';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 
@@ -15,7 +15,7 @@ export type RootStackParamList = {
   Home: undefined;
   Search: undefined;
   Random: undefined;
-  Details: { meal: Meal }
+  Details: { meal: Meal | null };
 };
 
 export default function App() {
@@ -31,6 +31,7 @@ export default function App() {
           <RootStack.Screen
             name="Details"
             component={DetailsScreen}
+            initialParams={{ meal: null }}
             />
           <RootStack.Screen
             name="Random"
