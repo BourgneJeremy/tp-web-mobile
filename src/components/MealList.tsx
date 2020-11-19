@@ -1,19 +1,26 @@
 import React from 'react';
 import { View, StyleSheet, FlatList } from 'react-native';
 import { Meal } from '../models/types';
-import MealItem from './MealDisplay';
+import MealItem from './MealItem';
+import {
+    NavigationParams,
+    NavigationScreenProp,
+    NavigationState,
+  } from 'react-navigation';
 
 type Props = {
     mealList: Meal[]
+    navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
 
-const MealList: React.FC<Props> = ({ mealList }) => {
+const MealList: React.FC<Props> = ({ mealList, navigation }) => {
     const renderItem = ({ item }: { item: Meal }) => (
         <MealItem id={item.id}
             title={item.title} 
             category={item.category} 
             instructions={item.instructions}
-            thumbnail={item.thumbnail} />
+            thumbnail={item.thumbnail}
+            navigation={navigation} />
     );
 
     return (

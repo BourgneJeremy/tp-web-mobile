@@ -8,6 +8,7 @@ import SearchScreen from './src/screens/SearchScreen';
 import DetailsScreen from './src/screens/DetailsScreen';
 import RandomScreen from './src/screens/RandomScreen';
 import { Meal } from './src/models/types';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const RootStack = createStackNavigator<RootStackParamList>();
 

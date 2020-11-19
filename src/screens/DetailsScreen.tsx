@@ -1,10 +1,14 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { RouteProp } from '@react-navigation/native';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { Meal } from '../models/types';
-import MealItem from '../components/MealDisplay';
+import MealItem from '../components/MealItem';
+import {
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState,
+} from 'react-navigation';
 
 // const RootStack = createStackNavigator<RootStackParamList>();
 export type RootStackParamList = {
@@ -22,7 +26,7 @@ export type DetailsScreenNavigationProp = StackNavigationProp<
 type DetailsScreenRouteProp = RouteProp<RootStackParamList, 'Details'>;
 
 type Props = {
-  navigation: DetailsScreenNavigationProp;
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
   route: DetailsScreenRouteProp;
 }
 
