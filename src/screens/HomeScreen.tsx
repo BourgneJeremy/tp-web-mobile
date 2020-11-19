@@ -29,15 +29,6 @@ const HomeScreen: React.FC<Props> = ({ navigation }) => {
                 }
             />
             <Divider style={{marginTop: 10, marginBottom: 10}} />
-            <Button 
-                title="Go to Details"
-                onPress={() => 
-                    navigation.navigate('Details', {
-                        itemId: 86,
-                        text: "Here is some text"
-                    })
-                }
-            />
         </View>
     )
 }

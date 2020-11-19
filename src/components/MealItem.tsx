@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Button, Text } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { Meal } from '../models/types';
-import { Card, Divider, Paragraph, Title } from 'react-native-paper';
+import { Card, Divider, Paragraph, Title, Button } from 'react-native-paper';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useRoute } from '@react-navigation/native';
+import { EvilIcons } from '@expo/vector-icons'; 
 import {
     NavigationParams,
     NavigationScreenProp,
@@ -44,6 +45,8 @@ const MealItem: React.FC<Props> = ({ id, title, category, instructions, thumbnai
         thumbnail: thumbnail
     }
     
+    const displayInstructions = processInstructions(instructions);
+
     return(
         <ScrollView>
             <Card>
@@ -52,17 +55,35 @@ const MealItem: React.FC<Props> = ({ id, title, category, instructions, thumbnai
                 { route.name == "Details" ? 
                     <Card.Content>
                         <Title>Instructions</Title>
-                        <Paragraph>{instructions}</Paragraph>
+                        {displayInstructions.map((instruction, key) => <Paragraph key={key} style={{color: "gray"}}><EvilIcons name="arrow-right" size={20} color="purple" /> {instruction}</Paragraph>)}
                     </Card.Content>
                     : 
                     <Card.Actions>
-                        <Button title="See more" onPress={() => navigation.navigate("Details", { meal: meal }) }>See more</Button> 
+                        <Button onPress={() => navigation.navigate("Details", { meal: meal }) }>See more</Button> 
                     </Card.Actions>
                 }
                 <Divider />
             </Card>
         </ScrollView>
     )
+}
+
+const processInstructions = (instructions: string) => {
+    var arrInstructions = instructions.split(". ");
+    arrInstructions.map(item => {
+        var newItem = item.trimStart();
+        if (item[item.length - 1] == ".") {
+            newItem = item.slice(item.length - 1, 0);
+        }
+
+        if (newItem != "") {
+            return newItem + ".";
+        } else {
+            return null;
+        }
+    })
+
+    return arrInstructions;
 }
 
 const styles = StyleSheet.create({
