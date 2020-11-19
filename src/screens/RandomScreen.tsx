@@ -41,11 +41,7 @@ const RandomScreen: React.FC<Props> = ({ navigation }) => {
     if (randomMeal !== undefined) {
         return(
             <View>
-                <MealItem id={randomMeal.id} 
-                    title={randomMeal.title}
-                    category={randomMeal.category} 
-                    instructions={randomMeal.instructions}
-                    thumbnail={randomMeal.thumbnail}
+                <MealItem meal={randomMeal}
                     navigation={navigation} />
             </View>
         )

@@ -7,7 +7,8 @@ export const toMeals = (jsonMeal: JSONMeal) => {
         title: jsonMeal.strMeal,
         category: jsonMeal.strCategory,
         instructions: jsonMeal.strInstructions,
-        thumbnail: jsonMeal.strMealThumb
+        thumbnail: jsonMeal.strMealThumb,
+        tags: jsonMeal.strTags
     }
     return meal;
 }

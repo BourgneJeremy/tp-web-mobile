@@ -15,11 +15,7 @@ type Props = {
 
 const MealList: React.FC<Props> = ({ mealList, navigation }) => {
     const renderItem = ({ item }: { item: Meal }) => (
-        <MealItem id={item.id}
-            title={item.title} 
-            category={item.category} 
-            instructions={item.instructions}
-            thumbnail={item.thumbnail}
+        <MealItem meal={item}
             navigation={navigation} />
     );
 

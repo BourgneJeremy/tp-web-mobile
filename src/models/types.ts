@@ -4,6 +4,7 @@ export type Meal = {
     category: string,
     instructions: string
     thumbnail: string
+    tags: string
 }
 
 export type JSONMeal = {
@@ -12,4 +13,5 @@ export type JSONMeal = {
     strCategory: string,
     strInstructions: string
     strMealThumb: string
+    strTags: string
 }

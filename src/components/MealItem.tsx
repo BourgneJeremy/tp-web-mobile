@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { Meal } from '../models/types';
-import { Card, Divider, Paragraph, Title, Button } from 'react-native-paper';
+import { Card, Divider, Paragraph, Title, Button, Chip } from 'react-native-paper';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { useRoute } from '@react-navigation/native';
 import { EvilIcons } from '@expo/vector-icons'; 
@@ -18,11 +18,7 @@ export type DetailsScreenNavigationProp = StackNavigationProp<
 >
 
 type Props = {
-    id: string,
-    title: string,
-    category: string,
-    instructions: string
-    thumbnail: string,
+    meal: Meal
     // navigation prop here
     navigation: NavigationScreenProp<NavigationState, NavigationParams>;
 }
@@ -35,26 +31,21 @@ export type RootStackParamList = {
     Details: { meal: Meal };
   };
 
-const MealItem: React.FC<Props> = ({ id, title, category, instructions, thumbnail, navigation}: Props) => {
+const MealItem: React.FC<Props> = ({ meal, navigation}: Props) => {
     const route = useRoute();
-    const meal: Meal = {
-        id: id,
-        title: title,
-        category: category,
-        instructions: instructions,
-        thumbnail: thumbnail
-    }
-    
-    const displayInstructions = processInstructions(instructions);
+    const displayInstructions = processInstructions(meal.instructions);
+    const displayTags = processTags(meal.tags);
 
     return(
         <ScrollView>
             <Card>
-                <Card.Title title={title} subtitle={"Category: " + category} />
-                <Card.Cover source={{ uri: thumbnail }} />
+                <Card.Title title={meal.title} subtitle={"Category: " + meal.category} />
+                <Card.Cover source={{ uri: meal.thumbnail }} />
                 { route.name == "Details" ? 
                     <Card.Content>
                         <Title>Instructions</Title>
+                        <Divider style={{marginBottom: 8}} />
+                        {displayTags != null ? <Chip icon="information" style={{marginBottom: 15}}>Tags: {displayTags}</Chip> : <></>}
                         {displayInstructions.map((instruction, key) => <Paragraph key={key} style={{color: "gray"}}><EvilIcons name="arrow-right" size={20} color="purple" /> {instruction}</Paragraph>)}
                     </Card.Content>
                     : 
@@ -84,6 +75,16 @@ const processInstructions = (instructions: string) => {
     })
 
     return arrInstructions;
+}
+
+const processTags = (tags: string) => {
+    if (tags == null) {
+        return null;
+    } else if (tags.includes(",")) {
+        return tags.replace(",", ", ");
+    } else {
+        return tags;
+    }
 }
 
 const styles = StyleSheet.create({

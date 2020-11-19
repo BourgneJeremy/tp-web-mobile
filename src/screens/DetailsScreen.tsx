@@ -36,11 +36,7 @@ const DetailsScreen: React.FC<Props> = ({ route, navigation }: Props) => {
 
     return(
         <View>
-            <MealItem id={meal.id}
-                title={meal.title}
-                category={meal.category}
-                instructions={meal.instructions}
-                thumbnail={meal.thumbnail}
+            <MealItem meal={meal}
                 navigation={navigation} />
         </View>
     )
