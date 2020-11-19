@@ -26,7 +26,7 @@ type Props = {
   route: DetailsScreenRouteProp;
 }
 
-const DetailsScreen: React.FC<Props> = ({ route }: Props) => {
+const DetailsScreen: React.FC<Props> = ({ route, navigation }: Props) => {
     
     const { meal } = route.params;
 
@@ -36,7 +36,8 @@ const DetailsScreen: React.FC<Props> = ({ route }: Props) => {
                 title={meal.title}
                 category={meal.category}
                 instructions={meal.instructions}
-                thumbnail={meal.thumbnail} />
+                thumbnail={meal.thumbnail}
+                navigation={navigation} />
         </View>
     )
 }
